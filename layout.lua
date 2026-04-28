@@ -12,13 +12,13 @@ local Panel = require(root .. '.panel')
 local Layout = Class('Layout', Panel)
 
 -- Constructor for the Layout class
-function Layout:initialize(rect, config)
-    Panel.initialize(self, rect)
-    self.config = config or {}
+function Layout:initialize(layoutConfig, displayConfig)
+    Panel.initialize(self, layoutConfig, displayConfig)
+    self.displayConfig = displayConfig or {}
     -- -- Default layout is row
-    -- self.layout = self.config.layout or 'row'
+    -- self.layout = self.displayConfig.layout or 'row'
     -- Default fill color is black
-    self.bgColor = self.config.bgColor or { 0, 0, 0, 1 }
+    self.bgColor = self.displayConfig.bgColor or { 0, 0, 0, 1 }
     -- Initialize an empty table for child components
     self.children = {}
 end

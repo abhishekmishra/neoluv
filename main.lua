@@ -8,22 +8,34 @@ function love.load()
     local w, h
     w, h = love.graphics.getDimensions()
 
-    local title = ne0luv.Text({ w = 280, h = 24 }, {
+    local title = ne0luv.Text({
+        position = { x = 0, y = 0 },
+        size = { w = 280, h = 24 },
+    }, {
         text = 'Panel local coordinates demo'
     })
 
-    statusText = ne0luv.Text({ w = 280, h = 24 }, {
+    statusText = ne0luv.Text({
+        position = { x = 0, y = 0 },
+        size = { w = 280, h = 24 },
+    }, {
         text = 'Click the button or drag the slider'
     })
 
-    local button = ne0luv.Button({ w = 180, h = 32 }, {
+    local button = ne0luv.Button({
+        position = { x = 0, y = 0 },
+        size = { w = 180, h = 32 },
+    }, {
         text = 'Activate',
         onActivate = function()
             statusText:setText('Button activated')
         end
     })
 
-    local slider = ne0luv.Slider({ w = 220, h = 24 }, {
+    local slider = ne0luv.Slider({
+        position = { x = 0, y = 0 },
+        size = { w = 220, h = 24 },
+    }, {
         minValue = 0,
         maxValue = 100,
         currentValue = 25
@@ -33,15 +45,24 @@ function love.load()
         statusText:setText(string.format('Slider value: %.0f', value))
     end)
 
-    local nestedRow = ne0luv.RowLayout({ w = 280, h = 32 }, {
+    local nestedRow = ne0luv.RowLayout({
+        position = { x = 0, y = 0 },
+        size = { w = 280, h = 32 },
+    }, {
         bgColor = { 0.18, 0.18, 0.24, 0.9 }
     })
 
-    local nestedLabel = ne0luv.Text({ w = 120, h = 32 }, {
+    local nestedLabel = ne0luv.Text({
+        position = { x = 0, y = 0 },
+        size = { w = 120, h = 32 },
+    }, {
         text = 'Nested row:'
     })
 
-    local nestedButton = ne0luv.Button({ w = 120, h = 32 }, {
+    local nestedButton = ne0luv.Button({
+        position = { x = 0, y = 0 },
+        size = { w = 120, h = 32 },
+    }, {
         text = 'Nested button',
         onActivate = function()
             statusText:setText('Nested row button activated')
@@ -51,7 +72,10 @@ function love.load()
     nestedRow:addChild(nestedLabel)
     nestedRow:addChild(nestedButton)
 
-    root = ne0luv.ColumnLayout({ x = 0, y = 0, w = w, h = h }, {
+    root = ne0luv.ColumnLayout({
+        position = { x = 0, y = 0 },
+        size = { w = w, h = h },
+    }, {
         bgColor = { 0.1, 0.1, 0.1, 0.85 }
     })
 

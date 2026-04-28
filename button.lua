@@ -16,23 +16,23 @@ local Button = Class('Button', Panel)
 Button.static.idCounter = 0
 
 --- constructor
---@param rect dimensions of the panel
---@param config the configuration options for the button
-function Button:initialize(rect, config)
-    Panel.initialize(self, rect)
-    self.config = config or {}
+-- @param layoutConfig layout configuration for the button
+-- @param displayConfig display configuration for the button
+function Button:initialize(layoutConfig, displayConfig)
+    Panel.initialize(self, layoutConfig, displayConfig)
+    self.displayConfig = displayConfig or {}
     Button.idCounter = Button.idCounter + 1
     self.id = 'Button' .. Button.idCounter
-    self.displayText = self.config.text or ""
-    self.onActivate = self.config.onActivate or function() end
+    self.displayText = self.displayConfig.text or ""
+    self.onActivate = self.displayConfig.onActivate or function() end
     -- self.text = love.graphics.newText(love.graphics.getFont(), self.displayText)
-    self.font = self.config.font or love.graphics.getFont()
-    self.align = self.config.align or "left"
+    self.font = self.displayConfig.font or love.graphics.getFont()
+    self.align = self.displayConfig.align or "left"
     self.colors = {
-        bg = self.config.bgColor or { 0.2, 0.2, 0.2, 1 },
-        fg = self.config.fgColor or { 1, 1, 1, 1 },
-        bgSelect = self.config.bgSelectColor or self.config.bgColor,
-        fgSelect = self.config.fgSelectColor or self.config.fgColor
+        bg = self.displayConfig.bgColor or { 0.2, 0.2, 0.2, 1 },
+        fg = self.displayConfig.fgColor or { 1, 1, 1, 1 },
+        bgSelect = self.displayConfig.bgSelectColor or self.displayConfig.bgColor,
+        fgSelect = self.displayConfig.fgSelectColor or self.displayConfig.fgColor
     }
     self.colors.bgSelect = self.colors.bgSelect or { 0.35, 0.35, 0.35, 1 }
     self.colors.fgSelect = self.colors.fgSelect or self.colors.fg

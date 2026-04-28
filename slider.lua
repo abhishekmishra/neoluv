@@ -8,12 +8,12 @@ local Panel = require(root .. '.panel')
 local Slider = Class('Slider', Panel)
 
 -- Constructor for the Slider class
-function Slider:initialize(rect, config)
-    Panel.initialize(self, rect)
-    self.config = config or {}
-    self.minValue = self.config.minValue or 0                     -- Default minValue is 0
-    self.maxValue = self.config.maxValue or 100                   -- Default maxValue is 100
-    self.currentValue = self.config.currentValue or self.minValue -- Default currentValue is minValue
+function Slider:initialize(layoutConfig, displayConfig)
+    Panel.initialize(self, layoutConfig, displayConfig)
+    self.displayConfig = displayConfig or {}
+    self.minValue = self.displayConfig.minValue or 0                     -- Default minValue is 0
+    self.maxValue = self.displayConfig.maxValue or 100                   -- Default maxValue is 100
+    self.currentValue = self.displayConfig.currentValue or self.minValue -- Default currentValue is minValue
     self.handleWidth = 10                                         -- Width of the handle
     self.handleHeight = self:getHeight()                          -- Height of the handle
     self.handleX = self:calculateHandlePosition()                 -- Local X position of the handle

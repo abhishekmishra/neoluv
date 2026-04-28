@@ -7,8 +7,8 @@ local Layout = require(root .. '.layout')
 local RowLayout = Class('RowLayout', Layout)
 
 -- Constructor for the Layout class
-function RowLayout:initialize(rect, config)
-    Layout.initialize(self, rect, config)
+function RowLayout:initialize(layoutConfig, displayConfig)
+    Layout.initialize(self, layoutConfig, displayConfig)
 end
 
 function RowLayout:reflow()

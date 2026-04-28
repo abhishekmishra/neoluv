@@ -4,9 +4,10 @@
 --
 -- Behaviour:
 --
--- - A `Panel` owns a `Rect` that defines its position and bounds.
--- - A `Panel` constructor accepts either a `Rect` instance or a rect
---   specification table with named fields `w`, `h`, and optional `x`, `y`.
+-- - A `Panel` owns a `Rect` that defines its resolved position and bounds.
+-- - A `Panel` constructor accepts either a layout config table with
+--   `position = { x = ..., y = ... }` and `size = { w = ..., h = ... }`, or
+--   a `Rect` instance.
 -- - The `Rect` position and size are accessed through the `Rect`
 --   getter/setter API.
 -- - A `Panel` is visible when `shown == true`.
@@ -48,36 +49,54 @@ local Rect = require(root .. '.rect')
 local PANEL_DEFAULT_WIDTH = 100
 local PANEL_DEFAULT_HEIGHT = 100
 
-local function _normalize_rect(rect)
-    if rect == nil then
+local function _normalize_layout_config(layoutConfig)
+    if layoutConfig == nil then
         return Rect(0, 0, PANEL_DEFAULT_WIDTH, PANEL_DEFAULT_HEIGHT)
     end
 
-    if type(rect) ~= 'table' then
-        error("Panel rect must be a Rect or a table with w, h, and optional x, y", 3)
+    if type(layoutConfig) ~= 'table' then
+        error("Panel layoutConfig must be a Rect or a table with position and size", 3)
     end
 
-    if rect.isInstanceOf and rect:isInstanceOf(Rect) then
-        return rect
+    if layoutConfig.isInstanceOf and layoutConfig:isInstanceOf(Rect) then
+        return layoutConfig
     end
 
-    if rect.w == nil or rect.h == nil then
-        error("Panel rect table must define w and h", 3)
+    local position = layoutConfig.position
+    local size = layoutConfig.size
+
+    if type(position) ~= 'table' then
+        error("Panel layoutConfig.position must be a table with numeric x and y", 3)
     end
 
-    return Rect(rect.x or 0, rect.y or 0, rect.w, rect.h)
+    if type(size) ~= 'table' then
+        error("Panel layoutConfig.size must be a table with numeric w and h", 3)
+    end
+
+    if type(position.x) ~= 'number' or type(position.y) ~= 'number' then
+        error("Panel layoutConfig.position must define numeric x and y", 3)
+    end
+
+    if type(size.w) ~= 'number' or type(size.h) ~= 'number' then
+        error("Panel layoutConfig.size must define numeric w and h", 3)
+    end
+
+    return Rect(position.x, position.y, size.w, size.h)
 end
 
 -- Define the Panel class
 local Panel = Class('Panel')
 
 --- Create a new panel.
--- @tparam[opt] Rect|table rect Bounds for the panel. Accepts either a `Rect`
--- instance or a table `{ w = ..., h = ..., x = ..., y = ... }`. `w` and `h`
--- are required; `x` and `y` default to `0`. Defaults to a 100x100 panel at
--- `(0, 0)`.
-function Panel:initialize(rect)
-    self.rect = _normalize_rect(rect)
+-- @tparam[opt] Rect|table layoutConfig Layout configuration for the panel.
+-- Accepts either a canonical layout config
+-- `{ position = { x = ..., y = ... }, size = { w = ..., h = ... } }`, or a
+-- `Rect` instance. Defaults to a 100x100 panel at `(0, 0)`.
+-- @tparam[opt] table displayConfig Display configuration reserved for
+-- subclasses.
+function Panel:initialize(layoutConfig, displayConfig)
+    self.rect = _normalize_layout_config(layoutConfig)
+    self.displayConfig = displayConfig or {}
     self.parent = nil
     self.shown = true
 end
