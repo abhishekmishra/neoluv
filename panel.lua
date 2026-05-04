@@ -249,6 +249,10 @@ function Panel:mousepressed(x, y, button, istouch, presses)
         return
     end
 
+    if x == nil or y == nil then
+        return
+    end
+
     local panelX, panelY = x - self:getX(), y - self:getY()
     if self:containsHitboxPoint(panelX, panelY) then
         local localX, localY = self:toLocalPoint(x, y)
@@ -264,6 +268,10 @@ function Panel:mousereleased(x, y, button, istouch, presses)
         return
     end
 
+    if x == nil or y == nil then
+        return
+    end
+
     local panelX, panelY = x - self:getX(), y - self:getY()
     if self:containsHitboxPoint(panelX, panelY) then
         local localX, localY = self:toLocalPoint(x, y)
@@ -276,6 +284,10 @@ end
 
 function Panel:mousemoved(x, y, dx, dy, istouch)
     if not self.shown then
+        return
+    end
+
+    if x == nil or y == nil then
         return
     end
 
