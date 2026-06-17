@@ -12,18 +12,18 @@ function ImageButton:initialize(layoutConfig, displayConfig)
     self.images = {
         image = self.displayConfig.image,
         normal = self.displayConfig.normal,
+        disabled = self.displayConfig.disabled or self.displayConfig.normal,
         hover = self.displayConfig.hover or self.displayConfig.normal,
         down = self.displayConfig.down or self.displayConfig.normal
     }
-    print(self.images.hover)
 end
 
 function ImageButton:_draw()
-    local canvasRect = self:getCanvasRect()
-    if self.down then
-        -- print(self.down)
+    if not self.enabled then
+        love.graphics.draw(self.images.image, self.images.disabled, 0, 0)
+    elseif self.down then
         love.graphics.draw(self.images.image, self.images.down, 0, 0)
-    elseif self.hover then
+    elseif self:isSelected() then
         love.graphics.draw(self.images.image, self.images.hover, 0, 0)
     else
         love.graphics.draw(self.images.image, self.images.normal, 0, 0)

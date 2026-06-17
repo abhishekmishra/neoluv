@@ -55,7 +55,7 @@ function love.load()
     end)
 
     local nestedRow = ne0luv.RowLayout({
-        size = { w = 280, h = 32 },
+        size = { w = 500, h = 32 },
     }, {
         bgColor = { 0.18, 0.18, 0.24, 0.9 }
     })
@@ -69,6 +69,21 @@ function love.load()
         text = 'Nested row:'
     })
 
+    local imgBtnPng = love.graphics.newImage('assets/images/img-button.png')
+    local nestedImgButton = ne0luv.ImageButton({
+        size = { w = 64, h = 32 },
+    }, {
+        image = imgBtnPng,
+        normal = love.graphics.newQuad(0, 0, 64, 32, imgBtnPng),
+        disabled = love.graphics.newQuad(64, 0, 64, 32, imgBtnPng),
+        hover = love.graphics.newQuad(128, 0, 64, 32, imgBtnPng),
+        down = love.graphics.newQuad(192, 0, 64, 32, imgBtnPng),
+        onActivate = function()
+            statusText:setText('Image button activated')
+        end,
+        bgColor = { 1, 1, 1, 1 }
+    })
+
     local nestedButton = ne0luv.Button({
         size = { w = 120, h = 32 },
         margin = { 2, 10 },
@@ -77,12 +92,14 @@ function love.load()
     }, {
         text = 'Nested button',
         onActivate = function()
-            statusText:setText('Nested row button activated')
+            statusText:setText('image button toggled')
+            nestedImgButton:setEnabled(not nestedImgButton:isEnabled())
         end
     })
 
     nestedRow:addChild(nestedLabel)
     nestedRow:addChild(nestedButton)
+    nestedRow:addChild(nestedImgButton)
 
     local panelWithBorder = ne0luv.Panel({
         size = { w = 100, h = 100 },
