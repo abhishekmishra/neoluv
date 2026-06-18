@@ -12,17 +12,12 @@ local Panel = require(root .. '.panel')
 
 local Button = Class('Button', Panel)
 
---- a counter to keep track of the number of buttons created
-Button.static.idCounter = 0
-
 --- constructor
 -- @param layoutConfig layout configuration for the button
 -- @param displayConfig display configuration for the button
 function Button:initialize(layoutConfig, displayConfig)
     Panel.initialize(self, layoutConfig, displayConfig)
     self.displayConfig = displayConfig or {}
-    Button.idCounter = Button.idCounter + 1
-    self.id = 'Button' .. Button.idCounter
     self.displayText = self.displayConfig.text or ""
     self.onActivate = self.displayConfig.onActivate or function() end
     -- self.text = love.graphics.newText(love.graphics.getFont(), self.displayText)
