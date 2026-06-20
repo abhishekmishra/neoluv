@@ -1,7 +1,6 @@
 local neoluv = require('.')
 
 local root
-local statusText
 local w, h
 local samples = {}
 local sidePanel
@@ -94,6 +93,41 @@ local function createButton()
     })
 end
 
+local function createSlider()
+    local start = 0
+    local statusText = neoluv.Text({
+        size = { w = 280, h = 32 },
+        margin = { 2, 10 },
+        border = 1,
+        padding = 2
+    }, {
+        text = 'Slider value is ' .. tostring(start),
+        borderColor = { 0, 0, 0, 1 }
+    })
+    local slider = neoluv.Slider({
+        size = { w = 220, h = 24 },
+        margin = { 2, 10 },
+        border = 1,
+        padding = 2
+    }, {
+        minValue = 0,
+        maxValue = 100,
+        currentValue = start
+    })
+
+    slider:addChangeHandler(function(value)
+        statusText:setText(string.format('Slider value: %.0f', value))
+    end)
+    local ctr = neoluv.RowLayout({
+        size = { w = sampleContainerPanel:getWidth(), h = sampleContainerPanel:getHeight() },
+    }, {
+        bgColor = { 0.1, 0.1, 0.1, 0.85 }
+    })
+    ctr:addChild(statusText)
+    ctr:addChild(slider)
+    return ctr
+end
+
 function love.load()
     w, h = love.graphics.getDimensions()
     root = neoluv.RowLayout({
@@ -109,6 +143,7 @@ function love.load()
 
     addSample(createTextLabel(), "Text Label")
     addSample(createButton(), "Simple Button")
+    addSample(createSlider(), "Simple Slider")
 end
 
 function love.update(dt)
@@ -140,21 +175,6 @@ function love.keypressed(key)
 end
 
 local function createDefaultDemoPanel()
-    local slider = neoluv.Slider({
-        size = { w = 220, h = 24 },
-        margin = { 2, 10 },
-        border = 1,
-        padding = 2
-    }, {
-        minValue = 0,
-        maxValue = 100,
-        currentValue = 25
-    })
-
-    slider:addChangeHandler(function(value)
-        statusText:setText(string.format('Slider value: %.0f', value))
-    end)
-
     local nestedRow = neoluv.RowLayout({
         size = { w = 500, h = 32 },
     }, {
@@ -217,8 +237,6 @@ local function createDefaultDemoPanel()
         bgColor = { 0.1, 0.1, 0.1, 0.85 }
     })
 
-    root:addChild(statusText)
     root:addChild(nestedRow)
-    root:addChild(slider)
     root:addChild(panelWithBorder)
 end
