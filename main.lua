@@ -2,12 +2,62 @@ local ne0luv = require('.')
 
 local root
 local statusText
+local w, h
+local samples = {}
+
+local function addSample(samplePanel, name, description)
+    if samplePanel == nil then
+        error("sample panel is nil")
+    end
+    name = name or "noname"
+    description = description or "none"
+
+    table.insert(samples, {
+        name = name,
+        description = description,
+        onActivate = function()
+            samplePanel.show()
+        end,
+        onDeactivate = function()
+            samplePanel.hide()
+        end
+    })
+end
 
 function love.load()
     love.window.setTitle('ne0luv panel refactor playground')
-    local w, h
     w, h = love.graphics.getDimensions()
+end
 
+function love.update(dt)
+    root:update(dt)
+end
+
+function love.draw()
+    root:draw()
+end
+
+function love.mousepressed(x, y, button, istouch, presses)
+    root:mousepressed(x, y, button, istouch, presses)
+end
+
+function love.mousereleased(x, y, button, istouch, presses)
+    root:mousereleased(x, y, button, istouch, presses)
+end
+
+function love.mousemoved(x, y, dx, dy, istouch)
+    root:mousemoved(x, y, dx, dy, istouch)
+end
+
+function love.keypressed(key)
+    -- exit the application when escape is pressed
+    if key == "escape" then
+        love.event.quit()
+    end
+    root:keypressed(key)
+end
+
+local function createDefaultDemoPanel()
     local title = ne0luv.Text({
         size = { w = 280, h = 32 },
         margin = { 2, 10 },
@@ -122,32 +172,4 @@ function love.load()
     root:addChild(button)
     root:addChild(slider)
     root:addChild(panelWithBorder)
-end
-
-function love.update(dt)
-    root:update(dt)
-end
-
-function love.draw()
-    root:draw()
-end
-
-function love.mousepressed(x, y, button, istouch, presses)
-    root:mousepressed(x, y, button, istouch, presses)
-end
-
-function love.mousereleased(x, y, button, istouch, presses)
-    root:mousereleased(x, y, button, istouch, presses)
-end
-
-function love.mousemoved(x, y, dx, dy, istouch)
-    root:mousemoved(x, y, dx, dy, istouch)
-end
-
-function love.keypressed(key)
-    -- exit the application when escape is pressed
-    if key == "escape" then
-        love.event.quit()
-    end
-    root:keypressed(key)
 end
