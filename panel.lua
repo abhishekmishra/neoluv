@@ -40,7 +40,7 @@
 --
 -- @classmod Panel
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.panel$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 local Rect = require(root .. '.rect')

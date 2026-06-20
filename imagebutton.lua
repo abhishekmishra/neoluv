@@ -1,6 +1,6 @@
 --- Button class
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.imagebutton$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 local Button = require(root .. '.button')

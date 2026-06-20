@@ -5,7 +5,7 @@
 
 --- Button class
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.button$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 local Panel = require(root .. '.panel')

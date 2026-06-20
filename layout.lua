@@ -3,7 +3,7 @@
 --
 -- @classmod Layout
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.layout$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 local Panel = require(root .. '.panel')

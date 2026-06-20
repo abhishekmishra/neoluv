@@ -7,7 +7,7 @@ The next section describes the implementation, then we provide a few sample usag
 --]]
 
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.vector$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 

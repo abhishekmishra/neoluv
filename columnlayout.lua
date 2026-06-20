@@ -1,5 +1,5 @@
 local module_name = ...
-local root = assert(module_name:match("^(.*)%.columnlayout$"))
+local root = module_name:match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
 local Layout = require(root .. '.layout')
