@@ -17,8 +17,8 @@ local Button = Class('Button', Panel)
 function Button:initialize(layoutConfig, displayConfig)
     Panel.initialize(self, layoutConfig, displayConfig)
     self.displayConfig = displayConfig or {}
-    self.displayText = self.displayConfig.text or ""
-    self.onActivate = self.displayConfig.onActivate or function() end
+    self.displayConfig.text = self.displayConfig.text or ""
+    self.onActivate = self.displayConfig.onActivate or function(button) end
     -- self.text = love.graphics.newText(love.graphics.getFont(), self.displayText)
     self.font = self.displayConfig.font or love.graphics.getFont()
     self.align = self.displayConfig.align or "left"
@@ -82,7 +82,7 @@ function Button:_draw()
     love.graphics.rectangle('fill', 0, 0, canvasRect:getWidth(), canvasRect:getHeight())
     love.graphics.setColor(fgColor)
     love.graphics.setFont(self.font)
-    love.graphics.printf(self.displayText, 0, 0, canvasRect:getWidth(), self.align)
+    love.graphics.printf(self.displayConfig.text, 0, 0, canvasRect:getWidth(), self.align)
 end
 
 function Button:_mouseout()
@@ -99,7 +99,7 @@ end
 
 function Button:_mousereleased(x, y, button, istouch, presses)
     if self:isEnabled() then
-        self.onActivate()
+        self.onActivate(self)
     end
     self.down = false
 end
