@@ -2,8 +2,6 @@
 The design of this program borrows heavily from the Sample Vector implemtation in Love2d Docs, as well as the Vector API in p5.js. As a reault, the implementation is straighforward and provides the most common operations on Vector. The implementation prioritises simplicity.
 
 The Vector implementation provides just one public export, the Vector class. This class is written using the middleclass library.
-
-The next section describes the implementation, then we provide a few sample usages of the Vector API. The final sections list any future plans, current limitations, known issues etc.
 --]]
 
 local root = (...):match("^(.*)%.[^.]+$")
