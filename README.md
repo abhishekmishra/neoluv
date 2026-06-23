@@ -1,12 +1,14 @@
 # ne0luv
 
-Love2d UI, math and miscellaneous utilities.
+Reusable UI, math, and utility components for Love2D.
 
-The utilities are implemented as reusable classes using the excellent [middleclass](https://github.com/kikito/middleclass) library.
+Neoluv is a collection of reusable UI, layout, math, and utility components for Love2D. It aims to provide practical building blocks for games and applications while remaining lightweight and composable.
+
+The components are implemented as reusable classes using the excellent [middleclass](https://github.com/kikito/middleclass) library.
 
 ## Documentation
 
-API docs in source files should use [LDoc](https://lunarmodules.github.io/ldoc/manual/manual.md.html) format rather than LuaDoc. Keep canonical implementation contracts close to the relevant class or module, and keep `README.md` focused on the user-facing overview.
+API docs in source files use [LDoc](https://lunarmodules.github.io/ldoc/manual/manual.md.html) format.
 
 # Vector
 
