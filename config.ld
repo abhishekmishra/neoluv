@@ -1,5 +1,5 @@
 project = "Neoluv"
-title = "Neoluv documentation"
+title = "Neoluv Documentation"
 description = "Neoluv: Reusable UI, math, and utility components for Love2D."
 format = "discount"
 backtick_references = false
