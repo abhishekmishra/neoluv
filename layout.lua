@@ -1,6 +1,9 @@
 --- Base class of ne0luv Layout classes
 -- `Layout` defines the layout as a container of UI components
 --
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
 -- @classmod Layout
 local root = (...):match("^(.*)%.[^.]+$")
 

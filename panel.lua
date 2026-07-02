@@ -1,6 +1,6 @@
---- Base class for ne0luv UI panels.
+--- Base class for neoluv UI panels.
 -- `Panel` defines the canonical drawing and hit-testing contract for UI
--- components in ne0luv.
+-- components in neoluv.
 --
 -- Behaviour:
 --
@@ -38,7 +38,11 @@
 -- - parent-relative input reconciliation
 -- - input capture
 --
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
 -- @classmod Panel
+
 local root = (...):match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')

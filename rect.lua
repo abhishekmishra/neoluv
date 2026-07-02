@@ -1,3 +1,9 @@
+---
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
+-- @classmod Rect
+
 local root = (...):match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')

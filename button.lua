@@ -1,9 +1,11 @@
 --- button.lua - A simple button class
 --
--- date: 17/02/2024
--- author: Abhishek Mishra
+-- @date 17/02/2024
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
+-- @classmod Button
 
---- Button class
 local root = (...):match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')

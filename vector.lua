@@ -1,3 +1,8 @@
+---
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
+-- @classmod Vector
 --[[
 The design of this program borrows heavily from the Sample Vector implemtation in Love2d Docs, as well as the Vector API in p5.js. As a reault, the implementation is straighforward and provides the most common operations on Vector. The implementation prioritises simplicity.
 

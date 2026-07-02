@@ -1,9 +1,11 @@
 --- text.lua - A panel class that displays a single line of text
+-- Define the Text class that extends the Panel class
 --
 -- date: 17/02/2024
--- author: Abhishek Mishra
-
--- Define the Text class that extends the Panel class
+-- @author Abhishek Mishra
+-- @license MIT
+-- @copyright Neokaal Tech Private Limited, 2026
+-- @classmod Text
 local root = (...):match("^(.*)%.[^.]+$")
 
 local Class = require(root .. '.middleclass')
